@@ -15,6 +15,22 @@ body {
     padding: 20px;
 }
 
+.title {
+    font-weight: 600;
+    font-size: 2rem;
+    margin: 2rem 0;
+}
+
+.chat {
+    background-color: #f2f2f2;
+    color: #333333;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 20px;
+    display: inline-block;
+    max-width: 80%;
+}
+
 .chat-box {
     background-color: #ffffff;
     border-radius: 10px;
@@ -79,6 +95,26 @@ body {
     max-width: 80%;
 }
 
+/* user message right */
+.user-message {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.user-message :last-child {
+    margin-bottom: 0;
+}
+
+.user-message p {
+    background-color: #49c1c1;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 20px;
+    text-align: right;
+    max-width: 80%;
+}
+
 .chat-send {
     background-color: #49c1c1;
     color: #ffffff;
@@ -102,6 +138,7 @@ body {
     font-size: 16px;
     margin-right: 10px;
     width: 80%;
+    margin-left: 12px;
 }
 
 .chat-input:focus {
@@ -124,4 +161,14 @@ body {
     border-radius: 20px;
     cursor: pointer;
     margin-top: 2rem;
+}
+
+.chat-output {
+    background-color: #f2f2f2;
+    color: #333333;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 20px;
+    display: inline-block;
+    max-width: 80%;
 }

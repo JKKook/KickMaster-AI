@@ -9,6 +9,9 @@
     </head>
     <body>
         <div class="container">
+            <div class="title">
+                <em>Recommand this player</em>
+            </div>
             <div class="chat-box">
                 <div class="chat-header">
                     <div class="chat-avatar">
@@ -19,13 +22,15 @@
                         />
                     </div>
                     <div class="chat-info">
-                        <h2 class="chat-name">챗봇</h2>
+                        <h2 class="chat-name">Agent : CodrLee</h2>
                         <p class="chat-status">온라인</p>
                     </div>
                 </div>
                 <div class="chat-body">
                     <div class="chat-message">
-                        <p>안녕하세요! 무엇을 도와드릴까요?</p>
+                        <p>안녕하세요! 어떤 유형의 축구선수가 궁금하신가요?</p>
+                        <!-- 동적 라우팅 -->
+                        <div id="chat-log"></div>
                     </div>
                 </div>
                 <div class="chat-footer">
@@ -36,23 +41,12 @@
                             placeholder="메시지를 입력하세요"
                             class="chat-input"
                         />
-                        <button
-                            type="submit"
-                            onclick="fetchData()"
-                            class="chat-send"
-                        >
-                            보내기
-                        </button>
+                        <button type="submit" class="chat-send">보내기</button>
                     </form>
                 </div>
             </div>
-            <div class="button-container">
-                <button class="request-button" onclick="fetchData()">
-                    추천 받기
-                </button>
-            </div>
         </div>
 
-        <script src="recommand.js" defer></script>
+        <script src="./recommand.js" defer></script>
     </body>
 </html>
