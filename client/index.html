@@ -4,34 +4,55 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>플레이어를 추천해주마</title>
+        <title>채팅 UI</title>
+        <link rel="stylesheet" href="main.css" />
     </head>
     <body>
-        <h1></h1>
-        <button onclick="fetchData()">요청하기</button>
-        <script>
-            // response
-            const SERVER_URL = 'http://localhost:7003/api/chat';
+        <div class="container">
+            <div class="chat-box">
+                <div class="chat-header">
+                    <div class="chat-avatar">
+                        <img
+                            src="./assets/avatar2.png"
+                            alt="profile"
+                            class="avatar-img"
+                        />
+                    </div>
+                    <div class="chat-info">
+                        <h2 class="chat-name">챗봇</h2>
+                        <p class="chat-status">온라인</p>
+                    </div>
+                </div>
+                <div class="chat-body">
+                    <div class="chat-message">
+                        <p>안녕하세요! 무엇을 도와드릴까요?</p>
+                    </div>
+                </div>
+                <div class="chat-footer">
+                    <form class="input-form">
+                        <input
+                            type="text"
+                            name="userInput"
+                            placeholder="메시지를 입력하세요"
+                            class="chat-input"
+                        />
+                        <button
+                            type="submit"
+                            onclick="fetchData()"
+                            class="chat-send"
+                        >
+                            보내기
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="button-container">
+                <button class="request-button" onclick="fetchData()">
+                    추천 받기
+                </button>
+            </div>
+        </div>
 
-            async function fetchData() {
-                try {
-                    const response = await fetch(SERVER_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            // request body에 보낼 데이터
-                            userInput: '1998년생 잉글랜드 미드필더 추천 해줘봐',
-                        }),
-                    });
-                    const data = await response.json();
-                    console.log(data);
-                    return data;
-                } catch (error) {
-                    console.error(error);
-                }
-            }
-        </script>
+        <script src="recommand.js" defer></script>
     </body>
 </html>
