@@ -97,7 +97,7 @@ form.addEventListener('submit', (e) => {
 // select option
 const selectElement = document.querySelector('#yearOfBirth');
 const currentYear = new Date().getFullYear();
-for (let i = 1900; i <= currentYear; i += 10) {
+for (let i = currentYear; i >= 2000; i -= 1) {
     const optionElement = document.createElement('option');
     optionElement.value = i;
     optionElement.textContent = i;
