@@ -9,7 +9,7 @@ let userMessages = [];
 let gptMessages = [];
 
 // string 형태로 request에 전달
-let selectOption = '';
+let selectOption = [];
 
 // select option save
 const save = () => {
@@ -17,19 +17,31 @@ const save = () => {
     const optionLeague = document.querySelector('#league').value;
     const optionPosition = document.querySelector('#position').value;
 
-    selectOption =
-        optionBirth + '\u00a0' + optionLeague + '\u00a0' + optionPosition;
-    // console.log(selectOption);
+    let sumOption =
+        optionBirth +
+        '\u00a0' +
+        optionLeague +
+        '\u00a0' +
+        optionPosition +
+        '\u00a0';
 
-    // userMessages.push(optionBirth);
-    // userMessages.push(optionLeague);
-    // userMessages.push(optionPosition);
+    selectOption.push(sumOption);
+    console.log(selectOption);
 
+    if (selectOption) {
+        chatInput.value = `${sumOption}`;
+    }
     modal.style.display = 'none';
 };
 
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+// onClick 이벤트를 save 함수 호출로 지정
+document.querySelector('.select-save-btn').addEventListener('click', () => {
+    // 자동적으로 "보내기" 버튼이 눌려서 request 보낼 수 있도록
+    handleSubmit();
+    form.submit(e);
+});
+
+const handleSubmit = async () => {
     // userInput값 채팅 로그를 업데이트
     const userInput = chatInput.value; // 사용자가 입력한 값
     const userMessage = document.createElement('div');
@@ -56,6 +68,7 @@ form.addEventListener('submit', async (e) => {
         },
         body: JSON.stringify({
             // Message history 전달
+            selectOption, // selectOption req.body 전달
             userMessages, // input창
             gptMessages, // output창
         }),
@@ -71,9 +84,14 @@ form.addEventListener('submit', async (e) => {
     const botMessage = document.createElement('div');
     botMessage.className = 'chat-message';
     botMessage.innerHTML = `
-    <p>${chatGptOuput}</p>
-  `;
+     <p>${chatGptOuput}</p>
+   `;
     chatLog.appendChild(botMessage);
+};
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    handleSubmit();
 });
 
 // select option

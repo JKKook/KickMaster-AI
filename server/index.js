@@ -20,15 +20,27 @@ const openai = new OpenAIApi(configuration);
 
 // POST method Routes
 app.post('/api/chat', async (req, res) => {
-    const { userMessages, gptMessages } = req.body;
+    const { userMessages, gptMessages, selectOption } = req.body;
     console.log(userMessages);
     console.log(gptMessages);
+    console.log(selectOption);
+    console.log(req.body);
 
     // ChatGPT 가스라이팅
     let settingMessages = [
         { role: 'system', content: systemContent.settings }, // 시스템 역할 부여
         { role: 'user', content: systemContent.settings }, // 시스템 역할 부여를 위한 일종의 조치(가스라이팅)
         { role: 'assistant', content: systemContent.initial }, // response
+
+        // selectOption 셋팅
+        {
+            role: 'user',
+            content: `제가 궁금한 정보는 ${selectOption}에 해당하는 선수입니다. 추천 선수는 3명이상 알려주세요`,
+        },
+        {
+            role: 'assistant',
+            content: `선택 사항이 ${selectOption}인 것을 확인했습니다`,
+        },
     ];
 
     while (userMessages.length != 0 || gptMessages.length != 0) {
