@@ -20,18 +20,49 @@ const openai = new OpenAIApi(configuration);
 
 // POST method Routes
 app.post('/api/chat', async (req, res) => {
+    const { userMessages, gptMessages } = req.body;
+    console.log(userMessages);
+    console.log(gptMessages);
+
+    // ChatGPT 가스라이팅
+    let settingMessages = [
+        { role: 'system', content: systemContent.settings }, // 시스템 역할 부여
+        { role: 'user', content: systemContent.settings }, // 시스템 역할 부여를 위한 일종의 조치(가스라이팅)
+        { role: 'assistant', content: systemContent.initial }, // response
+    ];
+
+    while (userMessages.length != 0 || gptMessages.length != 0) {
+        // SERVER에서 디비에 저장해서 파싱할 때마다 전달하면 됨!
+        if (userMessages.length != 0) {
+            // JSON 형태로 SettingMessages에 client에서 받아온 userInput 배열 history 순차적으로 추가
+            settingMessages.push(
+                JSON.parse(
+                    '{"role" : "user", "content" : "' +
+                        String(userMessages.shift().replace(/\n/g, '')) +
+                        '"}',
+                ),
+            );
+        }
+        if (gptMessages.length != 0) {
+            // JSON 형태로 SettingMessages에 client에서 받아온 gptResponse 배열 history 순차적으로 추가
+            settingMessages.push(
+                JSON.parse(
+                    '{"role" : "assistant", "content" : "' +
+                        String(gptMessages.shift().replace(/\n/g, '')) +
+                        '"}',
+                ),
+            );
+        }
+    }
+
     const completion = await openai.createChatCompletion({
         model: 'gpt-3.5-turbo',
-        messages: [
-            { role: 'system', content: systemContent.settings }, // 시스템 역할 부여
-            { role: 'user', content: systemContent.settings }, // 시스템 역할 부여를 위한 일종의 조치(가스라이팅)
-            { role: 'assistant', content: systemContent.initial }, // response
-            { role: 'user', content: userContent }, // request_input
-        ],
+        messages: settingMessages,
         temperature: 1, // 창의적인 답변이 나올 수 있도록
+        top_p: 0.8,
     });
     let response = completion.data.choices[0].message['content'];
-    res.json(response);
+    res.json({ output: response });
 });
 
 app.listen(PORT, () => {
