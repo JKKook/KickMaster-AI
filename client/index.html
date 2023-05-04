@@ -29,6 +29,93 @@
                 <div class="chat-body">
                     <div class="chat-message">
                         <p>안녕하세요! 어떤 유형의 축구선수가 궁금하신가요?</p>
+                        <button class="modal-btn">Option 선택하기</button>
+                        <div class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <h2>Option 선택</h2>
+                                <!-- select Box -->
+                                <div
+                                    class="select-box-container select-box-container-open"
+                                >
+                                    <div class="modal-background">
+                                        <img
+                                            src="./assets/manager.jpeg"
+                                            alt="modal-background"
+                                        />
+                                    </div>
+                                    <label for="yearOfBirth">연도</label>
+                                    <select id="yearOfBirth" name="yearOfBirth">
+                                        <option value="">--선택 연도--</option>
+                                        <!-- 생년월일 option 생성 -->
+                                    </select>
+
+                                    <label for="league">리그</label>
+                                    <select id="league" name="league">
+                                        <option value="">--리그 선택--</option>
+                                        <optgroup label="리그">
+                                            <option value="EPL">EPL</option>
+                                            <option value="Laliga">
+                                                Laliga
+                                            </option>
+                                            <option value="Bundesliga">
+                                                Bundesliga
+                                            </option>
+                                            <option value="Serie A">
+                                                Serie A
+                                            </option>
+                                            <option value="Ligue 1">
+                                                Ligue 1
+                                            </option>
+                                            <option value="Eredivisie">
+                                                Eredivisie
+                                            </option>
+                                        </optgroup>
+                                    </select>
+
+                                    <label for="position">포지션</label>
+                                    <select id="position" name="position">
+                                        <option value="">
+                                            --포지션 선택--
+                                        </option>
+                                        <optgroup label="공격수">
+                                            <option value="FW">FW</option>
+                                            <option value="ST">ST</option>
+                                            <option value="CF">CF</option>
+                                            <option value="LW">LW</option>
+                                            <option value="RW">RW</option>
+                                            <option value="SS">SS</option>
+                                        </optgroup>
+                                        <optgroup label="미드필더">
+                                            <option value="MF">MF</option>
+                                            <option value="CM">CM</option>
+                                            <option value="DM">CDM</option>
+                                            <option value="AM">CAM</option>
+                                            <option value="LM">LM</option>
+                                            <option value="RM">RM</option>
+                                        </optgroup>
+                                        <optgroup label="수비수">
+                                            <option value="DF">DF</option>
+                                            <option value="CB">CB</option>
+                                            <option value="LB">LB</option>
+                                            <option value="RB">RB</option>
+                                            <option value="WB">LWB</option>
+                                            <option value="WB">RWB</option>
+                                        </optgroup>
+                                        <optgroup label="골키퍼">
+                                            <option value="GK">GK</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <button
+                                    onclick="save()"
+                                    class="select-save-btn"
+                                >
+                                    선택 저장
+                                </button>
+                            </div>
+                        </div>
+
                         <!-- 동적 라우팅 -->
                         <div id="chat-log"></div>
                     </div>
