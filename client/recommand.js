@@ -42,6 +42,7 @@ document.querySelector('.select-save-btn').addEventListener('click', () => {
 });
 
 const handleSubmit = async () => {
+    showLoading();
     // userInput값 채팅 로그를 업데이트
     const userInput = chatInput.value; // 사용자가 입력한 값
     const userMessage = document.createElement('div');
@@ -76,6 +77,7 @@ const handleSubmit = async () => {
 
     const responseData = await response.json();
 
+    hideLoading();
     // ** response Message history - Gpt
     const chatGptOuput = responseData.output;
     gptMessages.push(chatGptOuput);
@@ -118,7 +120,17 @@ modalBtn.addEventListener('click', () => {
     }, 50);
 });
 
-// When the user clicks on <span> (x), close the modal
 closeContent.addEventListener('click', () => {
     modal.style.display = 'none';
 });
+
+// spinner
+const loading = document.querySelector('#loading');
+
+function showLoading() {
+    loading.style.display = 'block';
+}
+
+function hideLoading() {
+    loading.style.display = 'none';
+}
