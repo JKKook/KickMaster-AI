@@ -1,2 +1,3 @@
-chatGPT 관련 프로젝트 진도가 나가지 않아서,
-다른 프로젝트를 참고하면서 적용해나갈 목적으로 진행!
+
+
+![image](https://user-images.githubusercontent.com/104504666/236631570-6e16f61f-cd80-4e8f-a9fe-11f9ce5a4f9d.png)
