@@ -6,6 +6,7 @@ const { systemContent } = require('./model/System');
 const { userContent } = require('./model/User');
 const app = express();
 const PORT = 7003;
+const path = require('path');
 
 require('dotenv').config();
 
@@ -14,17 +15,21 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // cors 옵션 세팅
-// let corsOptions = {
-//     origin: 'https://football-agent-ai.pages.dev',
-//     credentials: true,
-// };
-// app.use(cors(corsOptions));
-app.use(cors());
+let corsOptions = {
+    origin: 'https://football-agent-ai.pages.dev',
+    credentials: true,
+};
+app.use(cors(corsOptions));
+// app.use(cors());
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
+
+app.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname + '/client/index.html'));
+});
 
 // POST method Routes
 app.post('/api/chat', async (req, res) => {
@@ -85,8 +90,8 @@ app.post('/api/chat', async (req, res) => {
     res.json({ output: response });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`Server is running on port ${PORT}`);
+// });
 
-// module.exports.handler = serverless(app);
+module.exports.handler = serverless(app);
