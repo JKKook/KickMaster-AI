@@ -1,6 +1,6 @@
 const BUILD_SERVER =
     'https://dwwyyi3n4rqi2eah7qkqhty2rq0zfnvr.lambda-url.ap-northeast-2.on.aws/api/chat';
-// const SERVER_URL = 'http://localhost:7003/api/chat';
+const SERVER_URL = 'http://localhost:7003/api/chat';
 
 const chatLog = document.getElementById('chat-log'); // 채팅 기록이 표시될 div 엘리먼트
 const form = document.querySelector('.input-form'); // form 엘리먼트
@@ -89,8 +89,19 @@ const handleSubmit = async () => {
     const botMessage = document.createElement('div');
     botMessage.className = 'chat-message';
     botMessage.innerHTML = `
-     <p>${chatGptOuput}</p>
-   `;
+     <p>${chatGptOuput} </p>`;
+
+    const linkText = document.createElement('p');
+    linkText.classList.add('chat-pay-text');
+    linkText.innerHTML = `\n 링크를 눌러서 후원이 가능합니다 =>`;
+    const link = document.createElement('a');
+    link.classList.add('chat-pay-link');
+    link.href = 'https://toss.me/codrlee';
+    link.innerHTML = `마음 표현하기🧡`;
+
+    linkText.appendChild(link);
+    botMessage.appendChild(linkText);
+
     chatLog.appendChild(botMessage);
 };
 

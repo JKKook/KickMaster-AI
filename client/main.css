@@ -359,3 +359,30 @@ body {
     font-size: 18px;
     margin-top: 10px;
 }
+
+/* ad */
+.kakao-adfit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    min-width: 350px;
+    min-height: 200px;
+}
+
+/* pay */
+.chat-pay-text {
+    border: none !important;
+    font-family: 'Courier New', Courier, monospace !important;
+    font-weight: 500;
+    margin-top: 0.3rem;
+    font-size: 0.8rem !important;
+    background-color: #ffffff !important;
+    color: rebeccapurple !important;
+}
+
+.chat-pay-link {
+    margin-left: 16px;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
