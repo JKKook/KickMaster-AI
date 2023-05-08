@@ -1,3 +1,4 @@
+const serverless = require('serverless-http');
 const { Configuration, OpenAIApi } = require('openai');
 const express = require('express');
 const cors = require('cors');
@@ -11,7 +12,13 @@ require('dotenv').config();
 // 노드 데이터를 리액트로 보내기 위한 세팅
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+
+// cors 옵션 세팅
+let corsOptions = {
+    origin: 'https://football-agent-ai.pages.dev',
+    credentials: true,
+};
+app.use(cors(corsOptions));
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
@@ -77,6 +84,8 @@ app.post('/api/chat', async (req, res) => {
     res.json({ output: response });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`Server is running on port ${PORT}`);
+// });
+
+module.exports.handler = serverless(app);

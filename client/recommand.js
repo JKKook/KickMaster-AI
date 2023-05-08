@@ -1,4 +1,6 @@
-const SERVER_URL = 'http://localhost:7003/api/chat';
+const BUILD_SERVER =
+    'https://dwwyyi3n4rqi2eah7qkqhty2rq0zfnvr.lambda-url.ap-northeast-2.on.aws/api/chat';
+// const SERVER_URL = 'http://localhost:7003/api/chat';
 
 const chatLog = document.getElementById('chat-log'); // 채팅 기록이 표시될 div 엘리먼트
 const form = document.querySelector('.input-form'); // form 엘리먼트
@@ -37,8 +39,9 @@ const save = () => {
 // onClick 이벤트를 save 함수 호출로 지정
 document.querySelector('.select-save-btn').addEventListener('click', () => {
     // 자동적으로 "보내기" 버튼이 눌려서 request 보낼 수 있도록
+    save();
     handleSubmit();
-    form.submit(e);
+    // form.submit();
 });
 
 const handleSubmit = async () => {
@@ -62,7 +65,7 @@ const handleSubmit = async () => {
     }
 
     // 사용자가 입력한 값을 서버로 전송하여 AI 응답을 가져옴
-    const response = await fetch(SERVER_URL, {
+    const response = await fetch(BUILD_SERVER, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
