@@ -44,7 +44,6 @@ let corsOptions = {
     credentials: true,
 };
 app.use(cors(corsOptions));
-// app.use(cors());
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
@@ -123,8 +122,8 @@ app.post('/api/chat', async (req, res) => {
     res.json({ output: response });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`Server is running on port ${PORT}`);
+// });
 
-// module.exports.handler = serverless(app);
+module.exports.handler = serverless(app);
