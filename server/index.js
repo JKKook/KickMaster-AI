@@ -31,6 +31,10 @@ app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname + '/client/index.html'));
 });
 
+app.get('/user/chat', (req, res) => {
+    res.sendFile(path.resolve(__dirname + '/client/chat.html'));
+});
+
 // POST method Routes
 app.post('/api/chat', async (req, res) => {
     const { userMessages, gptMessages, selectOption } = req.body;

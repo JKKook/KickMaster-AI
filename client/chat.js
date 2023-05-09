@@ -1,6 +1,6 @@
 const BUILD_SERVER =
     'https://dwwyyi3n4rqi2eah7qkqhty2rq0zfnvr.lambda-url.ap-northeast-2.on.aws/api/chat';
-const SERVER_URL = 'http://localhost:7003/api/chat';
+// const SERVER_URL = 'http://localhost:7003/api/chat';
 
 const chatLog = document.getElementById('chat-log'); // 채팅 기록이 표시될 div 엘리먼트
 const form = document.querySelector('.input-form'); // form 엘리먼트
