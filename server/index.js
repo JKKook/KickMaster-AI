@@ -54,7 +54,7 @@ const openai = new OpenAIApi(configuration);
 // render with ejs engine
 // AWSLambda 루트 경로
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '../client', 'views'));
+app.set('views', path.join(__dirname, '..', 'client', 'views'));
 
 // GET
 app.get('/', (req, res) => {
@@ -113,13 +113,27 @@ app.post('/api/chat', async (req, res) => {
             );
         }
     }
+    const maxRetries = 3;
+    let retries = 0;
+    let completion;
+    while (retries < maxRetries) {
+        try {
+            completion = await openai.createChatCompletion({
+                model: 'gpt-3.5-turbo',
+                messages: settingMessages,
+                temperature: 1, // 창의적인 답변이 나올 수 있도록
+                top_p: 0.8,
+            });
+            break;
+        } catch (error) {
+            retries++;
+            console.log(error);
+            console.log(
+                `Error fetching data, retrying(${retries} / ${maxRetries})...`,
+            );
+        }
+    }
 
-    const completion = await openai.createChatCompletion({
-        model: 'gpt-3.5-turbo',
-        messages: settingMessages,
-        temperature: 1, // 창의적인 답변이 나올 수 있도록
-        top_p: 0.8,
-    });
     let response = completion.data.choices[0].message['content'];
     res.json({ output: response });
 });
