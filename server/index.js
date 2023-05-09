@@ -1,14 +1,12 @@
+require('dotenv').config();
 const serverless = require('serverless-http');
 const { Configuration, OpenAIApi } = require('openai');
 const express = require('express');
 const cors = require('cors');
 const { systemContent } = require('./model/System');
-const { userContent } = require('./model/User');
 const app = express();
-const PORT = 7003;
+// const PORT = 7003;
 const path = require('path');
-
-require('dotenv').config();
 
 // 노드 데이터를 리액트로 보내기 위한 세팅
 app.use(express.urlencoded({ extended: true }));
@@ -16,6 +14,9 @@ app.use(express.json());
 
 // middleware , MIME type setting
 const clientPath = path.join(__dirname, '../client');
+app.use(express.static(clientPath));
+
+console.log(clientPath);
 app.use(
     '/stylesheets',
     express.static(path.join(clientPath, 'stylesheets'), {
@@ -51,10 +52,11 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 // render with ejs engine
+// AWSLambda 루트 경로
 app.set('view engine', 'ejs');
-const viewsPath = path.join(__dirname, '../client/views');
-app.set('views', viewsPath);
+app.set('views', path.join(__dirname, '../client', 'views'));
 
+// GET
 app.get('/', (req, res) => {
     res.render('index.ejs');
 });
@@ -66,10 +68,10 @@ app.get('/user/chat', (req, res) => {
 // POST method Routes
 app.post('/api/chat', async (req, res) => {
     const { userMessages, gptMessages, selectOption } = req.body;
-    console.log(userMessages);
-    console.log(gptMessages);
-    console.log(selectOption);
-    console.log(req.body);
+    // console.log(userMessages);
+    // console.log(gptMessages);
+    // console.log(selectOption);
+    // console.log(req.body);
 
     // ChatGPT 가스라이팅
     let settingMessages = [
