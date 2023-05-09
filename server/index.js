@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const clientPath = path.join(__dirname, '../client');
 
+// middleware , MIME type setting
 app.use(
     '/stylesheets',
     express.static(path.join(clientPath, 'stylesheets'), {
