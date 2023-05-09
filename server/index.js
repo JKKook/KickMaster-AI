@@ -13,6 +13,30 @@ require('dotenv').config();
 // 노드 데이터를 리액트로 보내기 위한 세팅
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+const clientPath = path.join(__dirname, '../client');
+
+app.use(
+    '/stylesheets',
+    express.static(path.join(clientPath, 'stylesheets'), {
+        setHeaders: (res, path) => {
+            if (path.endsWith('.css')) {
+                res.setHeader('Content-Type', 'text/css');
+            }
+        },
+    }),
+);
+app.use(
+    '/user/stylesheets',
+    express.static(path.join(clientPath, 'stylesheets'), {
+        setHeaders: (res, path) => {
+            if (path.endsWith('.css')) {
+                res.setHeader('Content-Type', 'text/css');
+            }
+        },
+    }),
+);
+
+app.use('/user/assets', express.static(path.join(clientPath, 'assets')));
 
 // cors 옵션 세팅
 let corsOptions = {
@@ -28,11 +52,11 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname + '/client/index.html'));
+    res.render(path.join(__dirname, '..', '/client/index.ejs'));
 });
 
 app.get('/user/chat', (req, res) => {
-    res.sendFile(path.resolve(__dirname + '/client/chat.html'));
+    res.render(path.join(__dirname, '..', '/client/chat.ejs'));
 });
 
 // POST method Routes
@@ -94,8 +118,8 @@ app.post('/api/chat', async (req, res) => {
     res.json({ output: response });
 });
 
-// app.listen(PORT, () => {
-//     console.log(`Server is running on port ${PORT}`);
-// });
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
 
 module.exports.handler = serverless(app);
