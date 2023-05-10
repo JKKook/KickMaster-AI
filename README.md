@@ -3,16 +3,23 @@
 -   ChatGpt 3.5 turbo model을 이용한 인공지능 축구 선수 추천 서비스 웹입니다.
 -   직접 물어볼 수도 있고, 세계의 각 리그와 포지션, 연도까지 세부 옵션을 직접 선택하면 자동적으로 옵션에 맞는 선수를 추천해주는 것이 특징입니다.
 
+<br>
 ### 💻 프로젝트 이미지
 
 1. 홈 화면
-   <img src='./client/assets/chatbot-home.gif'>
+ <p align='center'>
+    <img src='./client/assets/chatbot-home.gif' width="70%">
+ </p>
 
 2. 채팅 화면(옵션)
-   <img src='./client/assets/chatbot-agent.gif'>
+ <p align='center'>
+    <img src='./client/assets/chatbot-agent.gif' width="70%">
+  </p>
 
 3. 채팅 화면(일반)
-   <img src='./client/assets/chatbot-chat.gif'>
+ <p align='center'>
+    <img src='./client/assets/chatbot-chat.gif' width="70%">
+  </p>
 
 ### 🌐 프로젝트 링크
 
