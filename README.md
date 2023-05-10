@@ -1,4 +1,4 @@
-# AI-football-agent : CodrLee
+# "KickMaster: AI-Powered Recommendations for World-Class Soccer Players"
 
 ChatGpt 3.5 turbo model을 이용한 <b>인공지능 축구 선수 추천 서비스 웹</b>입니다.
 직접 물어볼 수도 있고, 세계의 각 리그와 포지션, 연도까지 세부 옵션을 직접 선택하면
