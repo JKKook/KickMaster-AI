@@ -47,16 +47,15 @@ https://football-agent-ai.pages.dev/
 
 ### ✅ 기능 설명
 
--   UI
-    -   keyframes를 이용한 2D,3D animation구현
-    -   media-Quiery를 이용한 반응형 디자인 부각
-    -   한 눈에 알아보기 쉬운 사용법과 구조
 -   Chat
     -   chatting UI를 제공하므로서 챗봇임을 사용자에게 확실하게 인지
     -   Option 선택하기를 만들어서 좀 더 쉽게 서비스를 이용할 수 있도록 유도
 -   System
     -   openai를 사용해서 chatGpt-Ai 기능 사용
     -   input, output 각각 요청, 응답 기능 구현
+    -   요청 응답 메시지 순차적으로 연결
+    -   비정상적인 공백 및 이상한 형태의 문자 출력 방지
+    -   잘못된 요청으로 인한 앱 종료 방지
 
 ##
 
