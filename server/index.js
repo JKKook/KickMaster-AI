@@ -5,7 +5,7 @@ const express = require('express');
 const cors = require('cors');
 const { systemContent } = require('./model/System');
 const app = express();
-// const PORT = 7003;
+const PORT = 7003;
 const path = require('path');
 
 // 노드 데이터를 리액트로 보내기 위한 세팅
@@ -54,7 +54,8 @@ const openai = new OpenAIApi(configuration);
 // render with ejs engine
 // AWSLambda 루트 경로
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '..', 'client', 'views'));
+app.set('views', '../client/views');
+// app.set('views', path.join(__dirname, '..', 'client', 'views'));
 
 // GET
 app.get('/', (req, res) => {
@@ -138,8 +139,8 @@ app.post('/api/chat', async (req, res) => {
     res.json({ output: response });
 });
 
-// app.listen(PORT, () => {
-//     console.log(`Server is running on port ${PORT}`);
-// });
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
 
 module.exports.handler = serverless(app);
