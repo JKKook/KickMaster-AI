@@ -1,9 +1,11 @@
 # AI-football-agent : CodrLee
 
--   ChatGpt 3.5 turbo model을 이용한 인공지능 축구 선수 추천 서비스 웹입니다.
--   직접 물어볼 수도 있고, 세계의 각 리그와 포지션, 연도까지 세부 옵션을 직접 선택하면 자동적으로 옵션에 맞는 선수를 추천해주는 것이 특징입니다.
+ChatGpt 3.5 turbo model을 이용한 <b>인공지능 축구 선수 추천 서비스 웹</b>입니다.
+직접 물어볼 수도 있고, 세계의 각 리그와 포지션, 연도까지 세부 옵션을 직접 선택하면
+자동적으로 옵션에 맞는 선수를 추천해주는 것이 특징입니다.
 
-<br>
+##
+
 ### 💻 프로젝트 이미지
 
 1. 홈 화면
@@ -21,11 +23,16 @@
     <img src='./client/assets/chatbot-chat.gif' width="70%">
   </p>
 
+##
+
 ### 🌐 프로젝트 링크
 
 https://football-agent-ai.pages.dev/
 
 -   현재 SSR 배포 문제로 인해 Build v.1.0 버전으로 Roll-back한 상태입니다.
+-   모바일로 접속 시, 최소 크기로 인해 가로화면으로 이용해주십시오
+
+##
 
 ### ⚙️ 개발 환경
 
@@ -35,6 +42,8 @@ https://football-agent-ai.pages.dev/
 
 1. Front-End : CloudFlare
 2. Back-End : AWS Lambda
+
+##
 
 ### ✅ 기능 설명
 
@@ -48,6 +57,8 @@ https://football-agent-ai.pages.dev/
 -   System
     -   openai를 사용해서 chatGpt-Ai 기능 사용
     -   input, output 각각 요청, 응답 기능 구현
+
+##
 
 ### 🔆 프로젝트 구조
 
@@ -65,7 +76,7 @@ https://football-agent-ai.pages.dev/
 
 -   AWS Lambda에 서버를 배포하면서 해결하지 못한 부분이 있었습니다. local에서는 SSR이 잘 되었으나, 배포 시 람다함수의 디렉터리에서 찾지 못 하는 문제를 마주치게 되었고 에러를 해결하기 위해 빌드한 것을 단순화해서 롤백 후 처리를 위해 노력 중입니다
 
-### 🌟 디벨롭 예정 리스트
+## 🌟 디벨롭 예정 리스트
 
--   서버리스 환경인 AWS Lambda에 Express와 EJS 애플리케이션을 배포 (AWS CLI 설정, API Gateway 생성) 예정
--   MERN stack으로 실제 데이터베이스를 사용해서 openai 프로젝트 디벨롭 예정
+-   서버리스 환경인 AWS Lambda에 Express와 EJS 애플리케이션을 배포 (AWS CLI 설정, API Gateway 생성) 예정입니다
+-   MERN stack으로 실제 데이터베이스를 사용해서 openai 프로젝트 디벨롭 예정입니다
