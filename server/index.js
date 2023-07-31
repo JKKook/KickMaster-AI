@@ -1,43 +1,18 @@
-require('dotenv').config();
 const serverless = require('serverless-http');
 const { Configuration, OpenAIApi } = require('openai');
 const express = require('express');
 const cors = require('cors');
 const { systemContent } = require('./model/System');
+const { userContent } = require('./model/User');
 const app = express();
 const PORT = 7003;
 const path = require('path');
 
+require('dotenv').config();
+
 // 노드 데이터를 리액트로 보내기 위한 세팅
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-// middleware , MIME type setting
-const clientPath = path.join(__dirname, '../client');
-app.use(express.static(clientPath));
-
-console.log(clientPath);
-app.use(
-    '/stylesheets',
-    express.static(path.join(clientPath, 'stylesheets'), {
-        setHeaders: (res, path) => {
-            if (path.endsWith('.css')) {
-                res.setHeader('Content-Type', 'text/css');
-            }
-        },
-    }),
-);
-app.use(
-    '/user/stylesheets',
-    express.static(path.join(clientPath, 'stylesheets'), {
-        setHeaders: (res, path) => {
-            if (path.endsWith('.css')) {
-                res.setHeader('Content-Type', 'text/css');
-            }
-        },
-    }),
-);
-app.use('/user/assets', express.static(path.join(clientPath, 'assets')));
 
 // cors 옵션 세팅
 let corsOptions = {
@@ -51,28 +26,13 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-// render with ejs engine
-// AWSLambda 루트 경로
-app.set('view engine', 'ejs');
-app.set('views', '../client/views');
-// app.set('views', path.join(__dirname, '..', 'client', 'views'));
-
-// GET
-app.get('/', (req, res) => {
-    res.render('index.ejs');
-});
-
-app.get('/user/chat', (req, res) => {
-    res.render('chat.ejs');
-});
-
 // POST method Routes
 app.post('/api/chat', async (req, res) => {
     const { userMessages, gptMessages, selectOption } = req.body;
-    // console.log(userMessages);
-    // console.log(gptMessages);
-    // console.log(selectOption);
-    // console.log(req.body);
+    console.log(userMessages);
+    console.log(gptMessages);
+    console.log(selectOption);
+    console.log(req.body);
 
     // ChatGPT 가스라이팅
     let settingMessages = [
@@ -114,27 +74,13 @@ app.post('/api/chat', async (req, res) => {
             );
         }
     }
-    const maxRetries = 3;
-    let retries = 0;
-    let completion;
-    while (retries < maxRetries) {
-        try {
-            completion = await openai.createChatCompletion({
-                model: 'gpt-3.5-turbo',
-                messages: settingMessages,
-                temperature: 1, // 창의적인 답변이 나올 수 있도록
-                top_p: 0.8,
-            });
-            break;
-        } catch (error) {
-            retries++;
-            console.log(error);
-            console.log(
-                `Error fetching data, retrying(${retries} / ${maxRetries})...`,
-            );
-        }
-    }
 
+    const completion = await openai.createChatCompletion({
+        model: 'gpt-3.5-turbo',
+        messages: settingMessages,
+        temperature: 1, // 창의적인 답변이 나올 수 있도록
+        top_p: 0.8,
+    });
     let response = completion.data.choices[0].message['content'];
     res.json({ output: response });
 });
