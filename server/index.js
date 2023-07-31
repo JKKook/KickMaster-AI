@@ -20,19 +20,20 @@ let corsOptions = {
     credentials: true,
 };
 app.use(cors(corsOptions));
+// app.use(cors());
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
 
+app.get('/', function (req, res) {
+    res.send('Server Open!');
+});
+
 // POST method Routes
 app.post('/api/chat', async (req, res) => {
     const { userMessages, gptMessages, selectOption } = req.body;
-    console.log(userMessages);
-    console.log(gptMessages);
-    console.log(selectOption);
-    console.log(req.body);
 
     // ChatGPT 가스라이팅
     let settingMessages = [
@@ -80,6 +81,7 @@ app.post('/api/chat', async (req, res) => {
         messages: settingMessages,
         temperature: 1, // 창의적인 답변이 나올 수 있도록
         top_p: 0.8,
+        max_tokens: 50,
     });
     let response = completion.data.choices[0].message['content'];
     res.json({ output: response });
